@@ -20,7 +20,10 @@ def guess_name(name):
   response = requests.get(f'https://api.genderize.io?name={name}')
   response.raise_for_status()
   data = response.json()
-  return render_template('guess.html', data=data)
+  response = requests.get(f'https://api.agify.io?name={name}')
+  response.raise_for_status()
+  age_data = response.json()
+  return render_template('guess.html', data=data, age_data=age_data)
 
 
 if(__name__ == '__main__'):
